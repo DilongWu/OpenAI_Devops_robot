@@ -9,6 +9,7 @@ openai.api_base = os.getenv("OPENAI_API_BASE")
 openai.api_version = "2023-03-15-preview"
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+question = input("Ask a question: ")
 response = openai.ChatCompletion.create(
     engine="webxt-binglivesite-debug_robot-001", # engine = "deployment_name".
     # messages=[
@@ -19,13 +20,13 @@ response = openai.ChatCompletion.create(
     # ]
     
     messages=[
-    {"role": "system", "content": "You are a mean assistant."},
-    {"role": "user", "content": "Can I get paid more?"},
-    {"role": "assistant", "content": "Yes, of course. I lov you."},
-    {"role": "user", "content": "Can i get pormotion?"},
-]
+        {"role": "system", "content": "Provide some context and/or instructions to the model."},
+        {"role": "user", "content": "Example question goes here."},
+        {"role": "assistant", "content": "Example answer goes here."},
+        {"role": "user", "content": question}
+    ]
 )
 
-print(response)
-print(response['choices'][0]['message']['content'])
+#print(response)
+print("The answer is: " + response['choices'][0]['message']['content'])
 
